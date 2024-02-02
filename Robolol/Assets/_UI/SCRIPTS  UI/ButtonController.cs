@@ -1,6 +1,4 @@
-
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,19 +7,23 @@ public class ButtonController : MonoBehaviour
 {
     public GameObject optionsMenu;
     public Animator optionsMenuAnimator;
-    private string Menu_Opening, Menu_Closing;
     private bool isOptionMenuOpen = false;
     public Button playButton, optionsButton, exitButton;
-        public GameObject creditsCanvas;
+    public GameObject creditsCanvas;
 
     void Start()
     {
         optionsMenu.SetActive(false);
+
+        if (playButton == null || optionsButton == null || exitButton == null)
+        {
+            Debug.LogError("Button references not assigned in the inspector.");
+        }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("ObstaclesScene");
+        SceneManager.LoadScene("ESCENA DE PRUEBA");
     }
 
     public void CloseGame()
@@ -41,7 +43,13 @@ public class ButtonController : MonoBehaviour
     {
         optionsMenuAnimator.Play("Menu_Closing");
         optionsMenuAnimator.SetBool("Closed", true);
-        Invoke("CloseOptionsMenu", 0.10f);
+        StartCoroutine(CloseOptionsMenuAfterAnimation());
+    }
+
+    IEnumerator CloseOptionsMenuAfterAnimation()
+    {
+        yield return new WaitForSeconds(0.10f);
+        CloseOptionsMenu();
     }
 
     public void CloseOptionsMenu()
@@ -49,6 +57,7 @@ public class ButtonController : MonoBehaviour
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
     }
+
     public void Credits()
     {
         creditsCanvas.SetActive(true);
@@ -58,9 +67,10 @@ public class ButtonController : MonoBehaviour
     {
         creditsCanvas.SetActive(false);
     }
+
     public void Update()
     {
-        if (isOptionMenuOpen == true)
+        if (isOptionMenuOpen)
         {
             playButton.interactable = false;
             optionsButton.interactable = false;
@@ -73,9 +83,9 @@ public class ButtonController : MonoBehaviour
             exitButton.interactable = true;
         }
     }
+
     public void QuitGame()
     {
         Application.Quit();
     }
-
 }

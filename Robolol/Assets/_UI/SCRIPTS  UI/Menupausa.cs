@@ -1,46 +1,39 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Menupausa : MonoBehaviour
-
 {
     [SerializeField]
     GameObject pauseContainer;
 
-    private void Update()
+ private void Update()
+{
+    if (Input.GetKeyUp(KeyCode.Escape))
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            if (pauseContainer.activeInHierarchy == true)
-            {
-                pauseContainer.SetActive(false);
-            }
-            else
-            {
-                pauseContainer.SetActive(true);
-            }
-        }
+        Debug.Log("Escape key pressed");
+        TogglePauseMenu();
     }
-    public void Reset()
+}
+
+
+    private void TogglePauseMenu()
     {
-        SceneManager.LoadScene("GameplayScene");
+        pauseContainer.SetActive(!pauseContainer.activeInHierarchy);
     }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("ESCENA DE PRUEBA");
+    }
+
     public void Resume()
     {
-        if (pauseContainer.activeInHierarchy == true)
-        {
-            pauseContainer.SetActive(false);
-        }
-        else
-        {
-            pauseContainer.SetActive(true);
-        }
+        TogglePauseMenu();
     }
+
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainmenuScene");
+        SceneManager.LoadScene("Main menu");
     }
 }
