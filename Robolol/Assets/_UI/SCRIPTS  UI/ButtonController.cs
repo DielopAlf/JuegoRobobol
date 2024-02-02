@@ -10,6 +10,7 @@ public class ButtonController : MonoBehaviour
     private bool isOptionMenuOpen = false;
     public Button playButton, optionsButton, exitButton;
     public GameObject creditsCanvas;
+    public GameObject menuPrincipal;
 
     void Start()
     {
@@ -34,58 +35,61 @@ public class ButtonController : MonoBehaviour
 
     public void OpenOptionsMenu()
     {
+        // Cerrar el menú principal al abrir las opciones
+        CloseMainMenu();
+
         optionsMenu.SetActive(true);
         optionsMenuAnimator.Play("Menu_Opening");
         isOptionMenuOpen = true;
-    }
-
-    public void CloseOptionsMenuAnimation()
-    {
-        optionsMenuAnimator.Play("Menu_Closing");
-        optionsMenuAnimator.SetBool("Closed", true);
-        StartCoroutine(CloseOptionsMenuAfterAnimation());
-    }
-
-    IEnumerator CloseOptionsMenuAfterAnimation()
-    {
-        yield return new WaitForSeconds(0.10f);
-        CloseOptionsMenu();
     }
 
     public void CloseOptionsMenu()
     {
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
+
+        // Volver a activar el menú principal después de cerrar las opciones
+        ActivateMainMenu();
     }
 
     public void Credits()
     {
+        // Cerrar el menú principal al ver los créditos
+        CloseMainMenu();
+
         creditsCanvas.SetActive(true);
     }
 
     public void BackMainMenu()
     {
         creditsCanvas.SetActive(false);
+
+        // Volver a activar el menú principal después de cerrar los créditos
+        ActivateMainMenu();
     }
 
     public void Update()
     {
-        if (isOptionMenuOpen)
-        {
-            playButton.interactable = false;
-            optionsButton.interactable = false;
-            exitButton.interactable = false;
-        }
-        else
-        {
-            playButton.interactable = true;
-            optionsButton.interactable = true;
-            exitButton.interactable = true;
-        }
+        // Desactivar la interactividad de los botones cuando las opciones están abiertas
+        playButton.interactable = !isOptionMenuOpen;
+        optionsButton.interactable = !isOptionMenuOpen;
+        exitButton.interactable = !isOptionMenuOpen;
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void CloseMainMenu()
+    {
+        // Desactivar o esconder elementos del menú principal según tus necesidades
+        menuPrincipal.SetActive(false);
+    }
+
+    private void ActivateMainMenu()
+    {
+        // Volver a activar elementos del menú principal después de cerrar opciones o créditos
+        menuPrincipal.SetActive(true);
     }
 }
