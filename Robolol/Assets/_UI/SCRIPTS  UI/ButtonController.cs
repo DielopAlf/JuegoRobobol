@@ -11,6 +11,9 @@ public class ButtonController : MonoBehaviour
     public Button playButton, optionsButton, exitButton;
     public GameObject creditsCanvas;
     public GameObject menuPrincipal;
+    
+    public AudioSource backgroundMusic;  // AudioSource para la música de fondo
+    public AudioClip buttonClickClip;    // AudioClip para el sonido al pulsar el botón
 
     void Start()
     {
@@ -20,22 +23,33 @@ public class ButtonController : MonoBehaviour
         {
             Debug.LogError("Button references not assigned in the inspector.");
         }
+
+        PlayBackgroundMusic();  // Reproduce la música de fondo al iniciar
+    }
+
+    void PlayBackgroundMusic()
+    {
+        if (backgroundMusic != null && !backgroundMusic.isPlaying)
+        {
+            backgroundMusic.Play();
+        }
     }
 
     public void StartGame()
     {
+        PlayButtonClickSound();
         SceneManager.LoadScene("ESCENA DE PRUEBA");
     }
 
     public void CloseGame()
     {
+        PlayButtonClickSound();
         Debug.Log("Se ha cerrado el juego");
         Application.Quit();
     }
 
     public void OpenOptionsMenu()
     {
-        // Cerrar el menú principal al abrir las opciones
         CloseMainMenu();
 
         optionsMenu.SetActive(true);
@@ -48,29 +62,27 @@ public class ButtonController : MonoBehaviour
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
 
-        // Volver a activar el menú principal después de cerrar las opciones
         ActivateMainMenu();
+        PlayButtonClickSound(); // Mueve PlayButtonClickSound() aquí
     }
 
     public void Credits()
     {
-        // Cerrar el menú principal al ver los créditos
         CloseMainMenu();
 
         creditsCanvas.SetActive(true);
+        PlayButtonClickSound(); // Agrega esto
     }
 
     public void BackMainMenu()
     {
         creditsCanvas.SetActive(false);
-
-        // Volver a activar el menú principal después de cerrar los créditos
         ActivateMainMenu();
+        PlayButtonClickSound(); // Agrega esto
     }
 
     public void Update()
     {
-        // Desactivar la interactividad de los botones cuando las opciones están abiertas
         playButton.interactable = !isOptionMenuOpen;
         optionsButton.interactable = !isOptionMenuOpen;
         exitButton.interactable = !isOptionMenuOpen;
@@ -78,18 +90,25 @@ public class ButtonController : MonoBehaviour
 
     public void QuitGame()
     {
+        PlayButtonClickSound();
         Application.Quit();
     }
 
     private void CloseMainMenu()
     {
-        // Desactivar o esconder elementos del menú principal según tus necesidades
         menuPrincipal.SetActive(false);
     }
 
     private void ActivateMainMenu()
     {
-        // Volver a activar elementos del menú principal después de cerrar opciones o créditos
         menuPrincipal.SetActive(true);
+    }
+
+    private void PlayButtonClickSound()
+    {
+        if (buttonClickClip != null)
+        {
+            AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
+        }
     }
 }

@@ -10,6 +10,9 @@ public class Menupausa : MonoBehaviour
     public Button playButton, optionsButton, exitButton;
     public GameObject creditsCanvas;
     [SerializeField] GameObject pauseContainer;
+    
+    public AudioClip buttonClickClip;    // AudioClip para el sonido de los botones
+    public AudioSource ambientSound;      // AudioSource para el sonido ambiente
 
     private void Update()
     {
@@ -30,29 +33,36 @@ public class Menupausa : MonoBehaviour
         {
             CloseOptionsMenu();
         }
+
+        // Reproducir sonido ambiente al abrir/cerrar el menú de pausa
+        PlayAmbientSound();
     }
 
     public void ResetGame()
     {
+        PlayButtonClickSound();
         SceneManager.LoadScene("ESCENA DE PRUEBA");
     }
 
     public void Resume()
     {
+        PlayButtonClickSound();
         TogglePauseMenu();
     }
 
     public void OpenOptionsMenu()
     {
+        PlayButtonClickSound();
         // Cerrar el menú de pausa al abrir las opciones
-       // TogglePauseMenu();
-         CloseMainMenu();
+        // TogglePauseMenu();
+        CloseMainMenu();
         optionsMenu.SetActive(true);
-       
-        isOptionMenuOpen = true;
-    }
 
-    
+        isOptionMenuOpen = true;
+
+        // Reproducir sonido ambiente al abrir el menú de opciones
+        PlayAmbientSound();
+    }
 
     IEnumerator CloseOptionsMenuAfterAnimation()
     {
@@ -66,15 +76,20 @@ public class Menupausa : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
+        PlayButtonClickSound();
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
 
         // Volver a activar el menú principal después de cerrar las opciones
         ShowMainMenu();
+
+        // Reproducir sonido ambiente al cerrar el menú de opciones
+        PlayAmbientSound();
     }
 
     public void ReturnToMainMenu()
     {
+        PlayButtonClickSound();
         SceneManager.LoadScene("Main menu");
 
         // Asegúrate de que el menú de pausa esté activo al salir del menú de opciones
@@ -83,7 +98,8 @@ public class Menupausa : MonoBehaviour
         // Cerrar el menú de opciones
         CloseOptionsMenu();
     }
-     private void CloseMainMenu()
+
+    private void CloseMainMenu()
     {
         // Desactivar o esconder elementos del menú principal según tus necesidades
         pauseContainer.SetActive(false);
@@ -95,5 +111,20 @@ public class Menupausa : MonoBehaviour
         // Volver a activar elementos del menú principal según tus necesidades
         pauseContainer.SetActive(true);
     }
-}
 
+    private void PlayButtonClickSound()
+    {
+        if (buttonClickClip != null)
+        {
+            AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
+        }
+    }
+
+    private void PlayAmbientSound()
+    {
+        if (ambientSound != null && !ambientSound.isPlaying)
+        {
+            ambientSound.Play();
+        }
+    }
+}
