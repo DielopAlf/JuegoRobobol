@@ -18,7 +18,7 @@ public class CharacterAttackController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) && attackCooldown == attackCooldownTime)
+        if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
         {
             attacking = true;
         }
