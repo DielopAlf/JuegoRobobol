@@ -4,15 +4,12 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class Controladormusica : MonoBehaviour
+public class MusicVolumeControl : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Slider slider;
     public float initialValue;
     public float volume;
-
-    public AudioSource backgroundMusic;
-    public AudioSource soundEffect;
 
     private string musicVolumeString = "MusicVolume";
 
@@ -26,27 +23,13 @@ public class Controladormusica : MonoBehaviour
     public void ChangeVolume()
     {
         volume = slider.value;
-
-        // Ajustar el volumen de la música de fondo
         audioMixer.SetFloat(musicVolumeString, NormalizedVolume(volume));
-
-        // Ajustar el volumen de los efectos de sonido
-        if (soundEffect != null)
-        {
-            soundEffect.volume = volume;
-        }
     }
 
     public void SaveVolume()
     {
         PlayerPrefs.SetFloat(musicVolumeString, volume);
         PlayerPrefs.Save();
-
-        // Reproducir un efecto de sonido al guardar la configuración
-        if (soundEffect != null)
-        {
-            soundEffect.Play();
-        }
     }
 
     float NormalizedVolume(float normalizedVolume)

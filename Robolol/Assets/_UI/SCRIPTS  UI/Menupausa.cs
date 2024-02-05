@@ -10,9 +10,9 @@ public class Menupausa : MonoBehaviour
     public Button playButton, optionsButton, exitButton;
     public GameObject creditsCanvas;
     [SerializeField] GameObject pauseContainer;
-    
-    public AudioClip buttonClickClip;    // AudioClip para el sonido de los botones
-    public AudioSource ambientSound;      // AudioSource para el sonido ambiente
+
+    // public AudioClip buttonClickClip;    // AudioClip para el sonido de los botones
+    //public AudioSource ambientSound;      // AudioSource para el sonido ambiente
 
     private void Update()
     {
@@ -35,24 +35,24 @@ public class Menupausa : MonoBehaviour
         }
 
         // Reproducir sonido ambiente al abrir/cerrar el menú de pausa
-        PlayAmbientSound();
+        // PlayAmbientSound();
     }
 
     public void ResetGame()
     {
-        PlayButtonClickSound();
+        //  PlayButtonClickSound();
         SceneManager.LoadScene("ESCENA DE PRUEBA");
     }
 
     public void Resume()
     {
-        PlayButtonClickSound();
+        //  PlayButtonClickSound();
         TogglePauseMenu();
     }
 
     public void OpenOptionsMenu()
     {
-        PlayButtonClickSound();
+        //   PlayButtonClickSound();
         // Cerrar el menú de pausa al abrir las opciones
         // TogglePauseMenu();
         CloseMainMenu();
@@ -61,7 +61,7 @@ public class Menupausa : MonoBehaviour
         isOptionMenuOpen = true;
 
         // Reproducir sonido ambiente al abrir el menú de opciones
-        PlayAmbientSound();
+        //   PlayAmbientSound();
     }
 
     IEnumerator CloseOptionsMenuAfterAnimation()
@@ -76,7 +76,7 @@ public class Menupausa : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
-        PlayButtonClickSound();
+        //  PlayButtonClickSound();
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
 
@@ -84,12 +84,12 @@ public class Menupausa : MonoBehaviour
         ShowMainMenu();
 
         // Reproducir sonido ambiente al cerrar el menú de opciones
-        PlayAmbientSound();
+        //  PlayAmbientSound();
     }
 
     public void ReturnToMainMenu()
     {
-        PlayButtonClickSound();
+        //  PlayButtonClickSound();
         SceneManager.LoadScene("Main menu");
 
         // Asegúrate de que el menú de pausa esté activo al salir del menú de opciones
@@ -112,19 +112,20 @@ public class Menupausa : MonoBehaviour
         pauseContainer.SetActive(true);
     }
 
-    private void PlayButtonClickSound()
-    {
-        if (buttonClickClip != null)
-        {
-            AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
-        }
-    }
+    /*  private void PlayButtonClickSound()
+      {
+           if (buttonClickClip != null)
+           {
+               AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
+           }
+       }
 
-    private void PlayAmbientSound()
-    {
-        if (ambientSound != null && !ambientSound.isPlaying)
-        {
-            ambientSound.Play();
-        }
-    }
+       private void PlayAmbientSound()
+       {
+           if (ambientSound != null && !ambientSound.isPlaying)
+           {
+               ambientSound.Play();
+           }
+       }*/
+
 }

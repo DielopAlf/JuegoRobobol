@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 4193938218582099906}
   - component: {fileID: 563449311023611993}
   - component: {fileID: 7238379384825058216}
-  - component: {fileID: 2840496822138136307}
   m_Layer: 0
-  m_Name: controlador
+  m_Name: ButtonController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,14 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 0}
-  optionsMenuAnimator: {fileID: 0}
   playButton: {fileID: 0}
   optionsButton: {fileID: 0}
   exitButton: {fileID: 0}
   creditsCanvas: {fileID: 0}
   menuPrincipal: {fileID: 0}
-  buttonClickSound: {fileID: 0}
-  backgroundMusic: {fileID: 0}
 --- !u!114 &7238379384825058216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,21 +70,3 @@ MonoBehaviour:
   backText: {fileID: 0}
   backCreditsText: {fileID: 0}
   resetText: {fileID: 0}
---- !u!114 &2840496822138136307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5441903975501840538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86ac2248768726468d453d48785db23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 69af3bcf070bd4d44a7565da26b4b766, type: 2}
-  slider: {fileID: 0}
-  initialValue: 0
-  volume: 0
-  backgroundMusic: {fileID: 0}
-  soundEffect: {fileID: 0}
