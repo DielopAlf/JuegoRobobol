@@ -1792,8 +1792,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 69af3bcf070bd4d44a7565da26b4b766, type: 2}
   slider: {fileID: 1086883542}
-  initialValue: 0
-  volume: 0
+  initialValue: 100
+  volume: 1
 --- !u!4 &971341073
 Transform:
   m_ObjectHideFlags: 0
@@ -5389,8 +5389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 69af3bcf070bd4d44a7565da26b4b766, type: 2}
   slider: {fileID: 1742576783}
-  initialValue: 0
-  volume: 0
+  initialValue: 100
+  volume: 1
 --- !u!1 &1971949395
 GameObject:
   m_ObjectHideFlags: 0
