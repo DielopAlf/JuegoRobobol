@@ -43,6 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2335690548312744683}
+  - component: {fileID: 5738192965159697463}
   m_Layer: 0
   m_Name: Paviment
   m_TagString: Untagged
@@ -69,6 +70,27 @@ Transform:
   - {fileID: 899543208269433486}
   m_Father: {fileID: 891311274667505899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5738192965159697463
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463116017088549469}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 23.9, y: 0.24, z: 19.8}
+  m_Center: {x: 1.84, y: -1.76, z: -0.09}
 --- !u!1 &521570002521038542
 GameObject:
   m_ObjectHideFlags: 0
