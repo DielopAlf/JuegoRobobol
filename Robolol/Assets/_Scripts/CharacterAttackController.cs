@@ -49,8 +49,10 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (attacking == true)
             {
-                other.gameObject.SetActive(false);
+                EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }
+
 }
