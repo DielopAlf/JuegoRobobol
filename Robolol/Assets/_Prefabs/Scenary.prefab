@@ -409,6 +409,7 @@ Transform:
   - {fileID: 1177099839065583141}
   - {fileID: 4830519496078485870}
   - {fileID: 6964163676292466995}
+  - {fileID: 741442225926649926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &838391884243024308
@@ -11420,6 +11421,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e391b8c2d3044c844b67a9953825bf1e,
     type: 3}
   m_PrefabInstance: {fileID: 969958302544221355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &990959850427539373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 891311274667505899}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5089175388133142054, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 46b75a2b9063106458a81d6e05cbc8ac, type: 2}
+    - target: {fileID: 919132149155446097, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_Name
+      value: Gate SOLA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018593839970587555, guid: 833e465f32c50e840b583f3eb3639216,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 46b75a2b9063106458a81d6e05cbc8ac, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 4387337030858280819, guid: 833e465f32c50e840b583f3eb3639216, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 833e465f32c50e840b583f3eb3639216, type: 3}
+--- !u!4 &741442225926649926 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 833e465f32c50e840b583f3eb3639216,
+    type: 3}
+  m_PrefabInstance: {fileID: 990959850427539373}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1002235026197363753
 PrefabInstance:
@@ -63155,7 +63241,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 65a35e095aee67e43b3ee594b25872be, type: 2}
+      objectReference: {fileID: 2100000, guid: 249b27d3efcae974b95b18b780b47e78, type: 2}
     - target: {fileID: -8829223990588837246, guid: 91a977f80b22c41469539b8ee8805a81,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -63231,13 +63317,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 4387337030858280819, guid: 91a977f80b22c41469539b8ee8805a81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4787498608286196572, guid: 91a977f80b22c41469539b8ee8805a81,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 04376316aaa73e149bd5ba5bf1d843e5, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4646511957941445138, guid: 91a977f80b22c41469539b8ee8805a81, type: 3}
+    - {fileID: 134371077632484760, guid: 91a977f80b22c41469539b8ee8805a81, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a977f80b22c41469539b8ee8805a81, type: 3}
