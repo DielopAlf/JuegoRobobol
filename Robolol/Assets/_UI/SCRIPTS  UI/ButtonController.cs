@@ -1,96 +1,119 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
     public GameObject optionsMenu;
-   // public Animator optionsMenuAnimator;
-    private bool isOptionMenuOpen = false;
+    public bool isOptionMenuOpen = false;
     public Button playButton, optionsButton, exitButton;
     public GameObject creditsCanvas;
     public GameObject menuPrincipal;
-    
- //   public AudioSource backgroundMusic;  // AudioSource para la música de fondo
- //   public AudioClip buttonClickClip;    // AudioClip para el sonido al pulsar el botón
+
+    public AudioSource buttonAudioSource;
+    private int selectedButtonIndex = 0;
 
     void Start()
     {
         optionsMenu.SetActive(false);
 
-        if (playButton == null || optionsButton == null || exitButton == null)
+        if (buttonAudioSource == null)
         {
-            Debug.LogError("Button references not assigned in the inspector.");
+            Debug.LogError("Button Audio Source not assigned in the inspector.");
         }
-
-        PlayBackgroundMusic();  // Reproduce la música de fondo al iniciar
     }
 
-    void PlayBackgroundMusic()
+    public void PlayButtonSound()
     {
-       /* if (backgroundMusic != null && !backgroundMusic.isPlaying)
+        if (buttonAudioSource != null)
         {
-            backgroundMusic.Play();
-        }*/
+            buttonAudioSource.Play();
+        }
     }
 
     public void StartGame()
     {
-       // PlayButtonClickSound();
-        SceneManager.LoadScene("ESCENA DE PRUEBA");
+        StartCoroutine(PlayAndLoadScene("ESCENA DE PRUEBA", 0.5f));
     }
 
     public void CloseGame()
     {
-      //  PlayButtonClickSound();
+        StartCoroutine(PlayAndCloseGame());
+    }
+
+    IEnumerator PlayAndCloseGame()
+    {
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
         Debug.Log("Se ha cerrado el juego");
         Application.Quit();
     }
 
     public void OpenOptionsMenu()
     {
-        CloseMainMenu();
+        StartCoroutine(PlayAndOpenOptionsMenu());
+    }
 
+    IEnumerator PlayAndOpenOptionsMenu()
+    {
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        CloseMainMenu();
         optionsMenu.SetActive(true);
-      //  optionsMenuAnimator.Play("Menu_Opening");
         isOptionMenuOpen = true;
     }
 
     public void CloseOptionsMenu()
     {
+        StartCoroutine(PlayAndCloseOptionsMenu());
+    }
+
+    IEnumerator PlayAndCloseOptionsMenu()
+    {
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
-
         ActivateMainMenu();
-       // PlayButtonClickSound(); // Mueve PlayButtonClickSound() aquí
     }
 
     public void Credits()
     {
-        CloseMainMenu();
+        StartCoroutine(PlayAndShowCredits());
+    }
 
+    IEnumerator PlayAndShowCredits()
+    {
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        CloseMainMenu();
         creditsCanvas.SetActive(true);
-       // PlayButtonClickSound(); // Agrega esto
     }
 
     public void BackMainMenu()
     {
-        creditsCanvas.SetActive(false);
-        ActivateMainMenu();
-       // PlayButtonClickSound(); // Agrega esto
+        StartCoroutine(PlayAndBackMainMenu());
     }
 
-    public void Update()
+    IEnumerator PlayAndBackMainMenu()
     {
-        playButton.interactable = !isOptionMenuOpen;
-        optionsButton.interactable = !isOptionMenuOpen;
-        exitButton.interactable = !isOptionMenuOpen;
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        creditsCanvas.SetActive(false);
+        ActivateMainMenu();
     }
 
     public void QuitGame()
     {
-       // PlayButtonClickSound();
+        StartCoroutine(PlayAndQuitGame());
+    }
+
+    IEnumerator PlayAndQuitGame()
+    {
+        PlayButtonSound();
+        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
         Application.Quit();
     }
 
@@ -104,11 +127,10 @@ public class ButtonController : MonoBehaviour
         menuPrincipal.SetActive(true);
     }
 
-    /*private void PlayButtonClickSound()
+    IEnumerator PlayAndLoadScene(string sceneName, float delay)
     {
-        if (buttonClickClip != null)
-        {
-            AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
-        }
-    }*/
+        PlayButtonSound();
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
+    }
 }

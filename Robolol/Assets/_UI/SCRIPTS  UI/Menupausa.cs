@@ -11,8 +11,7 @@ public class Menupausa : MonoBehaviour
     public GameObject creditsCanvas;
     [SerializeField] GameObject pauseContainer;
 
-    // public AudioClip buttonClickClip;    // AudioClip para el sonido de los botones
-    //public AudioSource ambientSound;      // AudioSource para el sonido ambiente
+    public AudioSource audioSource;
 
     private void Update()
     {
@@ -21,111 +20,118 @@ public class Menupausa : MonoBehaviour
             Debug.Log("Escape key pressed");
             TogglePauseMenu();
         }
+
     }
 
     private void TogglePauseMenu()
     {
-        // Toggle activar/desactivar el menú de pausa
+        StartCoroutine(PlayAndTogglePauseMenu());
+    }
+
+    IEnumerator PlayAndTogglePauseMenu()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        }
+
         pauseContainer.SetActive(!pauseContainer.activeInHierarchy);
 
-        // Si el menú de opciones está abierto, ciérralo al abrir/cerrar el menú de pausa
         if (isOptionMenuOpen)
         {
             CloseOptionsMenu();
         }
-
-        // Reproducir sonido ambiente al abrir/cerrar el menú de pausa
-        // PlayAmbientSound();
     }
 
     public void ResetGame()
     {
-        //  PlayButtonClickSound();
+        StartCoroutine(PlayAndResetGame());
+    }
+
+    IEnumerator PlayAndResetGame()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        }
+
         SceneManager.LoadScene("ESCENA DE PRUEBA");
     }
 
     public void Resume()
     {
-        //  PlayButtonClickSound();
         TogglePauseMenu();
     }
 
     public void OpenOptionsMenu()
     {
-        //   PlayButtonClickSound();
-        // Cerrar el menú de pausa al abrir las opciones
-        // TogglePauseMenu();
+        StartCoroutine(PlayAndOpenOptionsMenu());
+    }
+
+    IEnumerator PlayAndOpenOptionsMenu()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        }
+
         CloseMainMenu();
         optionsMenu.SetActive(true);
-
         isOptionMenuOpen = true;
-
-        // Reproducir sonido ambiente al abrir el menú de opciones
-        //   PlayAmbientSound();
     }
 
     IEnumerator CloseOptionsMenuAfterAnimation()
     {
         yield return new WaitForSeconds(0.10f);
-
-        // No cerrar el menú de pausa aquí
-
-        // Volver a activar el menú de pausa después de cerrar las opciones
-        Resume();  // Usar Resume() en lugar de TogglePauseMenu() para evitar un bucle
+        Resume();
     }
 
     public void CloseOptionsMenu()
     {
-        //  PlayButtonClickSound();
+        StartCoroutine(PlayAndCloseOptionsMenu());
+    }
+
+    IEnumerator PlayAndCloseOptionsMenu()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        }
+
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
-
-        // Volver a activar el menú principal después de cerrar las opciones
         ShowMainMenu();
-
-        // Reproducir sonido ambiente al cerrar el menú de opciones
-        //  PlayAmbientSound();
     }
 
     public void ReturnToMainMenu()
     {
-        //  PlayButtonClickSound();
+        StartCoroutine(PlayAndReturnToMainMenu());
+    }
+
+    IEnumerator PlayAndReturnToMainMenu()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        }
+
         SceneManager.LoadScene("Main menu");
-
-        // Asegúrate de que el menú de pausa esté activo al salir del menú de opciones
         pauseContainer.SetActive(true);
-
-        // Cerrar el menú de opciones
         CloseOptionsMenu();
     }
 
     private void CloseMainMenu()
     {
-        // Desactivar o esconder elementos del menú principal según tus necesidades
         pauseContainer.SetActive(false);
     }
 
-    // Nueva función para volver a mostrar el menú principal
     private void ShowMainMenu()
     {
-        // Volver a activar elementos del menú principal según tus necesidades
         pauseContainer.SetActive(true);
     }
-
-    /*  private void PlayButtonClickSound()
-      {
-           if (buttonClickClip != null)
-           {
-               AudioSource.PlayClipAtPoint(buttonClickClip, Camera.main.transform.position);
-           }
-       }
-
-       private void PlayAmbientSound()
-       {
-           if (ambientSound != null && !ambientSound.isPlaying)
-           {
-               ambientSound.Play();
-           }
-       }*/
-
 }
