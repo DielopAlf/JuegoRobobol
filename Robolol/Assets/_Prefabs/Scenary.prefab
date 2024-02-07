@@ -11488,7 +11488,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 833e465f32c50e840b583f3eb3639216,
         type: 3}
       propertyPath: m_Name
-      value: Gate SOLA
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 6018593839970587555, guid: 833e465f32c50e840b583f3eb3639216,
         type: 3}
@@ -63315,7 +63315,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 91a977f80b22c41469539b8ee8805a81,
         type: 3}
       propertyPath: m_Name
-      value: Gate
+      value: FrameGate
       objectReference: {fileID: 0}
     - target: {fileID: 4387337030858280819, guid: 91a977f80b22c41469539b8ee8805a81,
         type: 3}
