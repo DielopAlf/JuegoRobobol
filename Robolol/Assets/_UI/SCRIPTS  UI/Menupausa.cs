@@ -1,68 +1,86 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class Menupausa : MonoBehaviour
+public class Menupausa : MonoBehaviour, IPointerEnterHandler
 {
     public GameObject optionsMenu;
     private bool isOptionMenuOpen = false;
-    public Button playButton, optionsButton, exitButton;
+    [SerializeField] private GameObject menuPausa;
     public GameObject creditsCanvas;
     [SerializeField] GameObject pauseContainer;
-
+    private bool juegopausado = false;
     public AudioSource audioSource;
+
+    private Button menuButton;
+
+    private void Start()
+    {
+        menuButton = GetComponent<Button>();
+    }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Debug.Log("Escape key pressed");
-            TogglePauseMenu();
+            if (juegopausado)
+            {
+                Reanudar();
+            }
+            else
+            {
+                Pausa();
+            }
         }
-
     }
 
-    private void TogglePauseMenu()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        StartCoroutine(PlayAndTogglePauseMenu());
+        ExpandirBoton(0.2f);
     }
 
-    IEnumerator PlayAndTogglePauseMenu()
+    private void ExpandirBoton(float expansionAmount)
     {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
-        }
+        menuButton.transform.localScale += new Vector3(expansionAmount, expansionAmount, 0f);
+    }
 
-        pauseContainer.SetActive(!pauseContainer.activeInHierarchy);
+    public void Pausa()
+    {
+        juegopausado = true;
+        Time.timeScale = 0f;
+        menuPausa.SetActive(true);
+    }
 
-        if (isOptionMenuOpen)
-        {
-            CloseOptionsMenu();
-        }
+    public void Reanudar()
+    {
+        juegopausado = false;
+        Time.timeScale = 1f;
+        menuPausa.SetActive(false);
     }
 
     public void ResetGame()
     {
-        StartCoroutine(PlayAndResetGame());
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    IEnumerator PlayAndResetGame()
+    public void ActivarMenuOpciones()
     {
-        if (audioSource != null)
+        if (!juegopausado)
         {
-            audioSource.Play();
-            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+            Pausa();
         }
 
-        SceneManager.LoadScene("ESCENA DE PRUEBA");
+        menuPausa.SetActive(false);
+        OpenOptionsMenu();
     }
 
-    public void Resume()
+    public void CambiarAEscena(string nombreDeEscena)
     {
-        TogglePauseMenu();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(nombreDeEscena);
     }
 
     public void OpenOptionsMenu()
@@ -75,18 +93,12 @@ public class Menupausa : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.Play();
-            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+            yield return new WaitForSeconds(0.5f);
         }
 
         CloseMainMenu();
         optionsMenu.SetActive(true);
         isOptionMenuOpen = true;
-    }
-
-    IEnumerator CloseOptionsMenuAfterAnimation()
-    {
-        yield return new WaitForSeconds(0.10f);
-        Resume();
     }
 
     public void CloseOptionsMenu()
@@ -99,30 +111,12 @@ public class Menupausa : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.Play();
-            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+            yield return new WaitForSeconds(0.5f);
         }
 
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
         ShowMainMenu();
-    }
-
-    public void ReturnToMainMenu()
-    {
-        StartCoroutine(PlayAndReturnToMainMenu());
-    }
-
-    IEnumerator PlayAndReturnToMainMenu()
-    {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-            yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
-        }
-
-        SceneManager.LoadScene("Main menu");
-        pauseContainer.SetActive(true);
-        CloseOptionsMenu();
     }
 
     private void CloseMainMenu()
