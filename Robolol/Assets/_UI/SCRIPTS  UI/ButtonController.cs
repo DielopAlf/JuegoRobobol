@@ -46,7 +46,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndCloseGame()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         Debug.Log("Se ha cerrado el juego");
         Application.Quit();
     }
@@ -59,7 +59,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndOpenOptionsMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         CloseMainMenu();
         optionsMenu.SetActive(true);
         isOptionMenuOpen = true;
@@ -73,7 +73,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndCloseOptionsMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
         ActivateMainMenu();
@@ -87,7 +87,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndShowCredits()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         CloseMainMenu();
         creditsCanvas.SetActive(true);
     }
@@ -100,7 +100,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndBackMainMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         creditsCanvas.SetActive(false);
         ActivateMainMenu();
     }
@@ -113,7 +113,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndQuitGame()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f); // Ajusta el tiempo de espera según tus necesidades
+        yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
 

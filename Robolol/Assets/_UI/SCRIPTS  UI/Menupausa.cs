@@ -1,131 +1,123 @@
-using System.Collections;
+using  System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class Menupausa : MonoBehaviour, IPointerEnterHandler
+public class Menupausa : MonoBehaviour
 {
-    public GameObject optionsMenu;
-    private bool isOptionMenuOpen = false;
-    [SerializeField] private GameObject menuPausa;
-    public GameObject creditsCanvas;
-    [SerializeField] GameObject pauseContainer;
-    private bool juegopausado = false;
-    public AudioSource audioSource;
 
-    private Button menuButton;
+    private bool juegoPausado = false;
+    private bool enMenuOpciones = false;
 
-    private void Start()
+    public GameObject menuPausa;
+    public GameObject menuOpciones;
+
+    // Agrega un AudioSource para reproducir el sonido
+
+    public AudioSource buttonAudioSource;
+    private int selectedButtonIndex = 0;
+    void Start()
     {
-        menuButton = GetComponent<Button>();
-    }
+        menuOpciones.SetActive(false);
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (buttonAudioSource == null)
         {
-            if (juegopausado)
+            Debug.LogError("Button Audio Source not assigned in the inspector.");
+        }
+    }
+    void Update()
+    {
+        if (!enMenuOpciones && Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (juegoPausado)
             {
-                Reanudar();
+                ReanudarJuego();
             }
             else
             {
-                Pausa();
+                PausarJuego();
             }
         }
     }
-
-    public void OnPointerEnter(PointerEventData eventData)
+    public void PlayButtonHoverSound()
     {
-        ExpandirBoton(0.2f);
+        if (buttonAudioSource != null)
+        {
+            buttonAudioSource.PlayOneShot(buttonAudioSource.clip);
+        }
     }
 
-    private void ExpandirBoton(float expansionAmount)
+    public void PlayButtonSound()
     {
-        menuButton.transform.localScale += new Vector3(expansionAmount, expansionAmount, 0f);
+        if (buttonAudioSource != null)
+        {
+            buttonAudioSource.Play();
+        }
     }
 
-    public void Pausa()
+    public void PausarJuego()
     {
-        juegopausado = true;
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
+        juegoPausado = true;
         menuPausa.SetActive(true);
+        // Aquí puedes personalizar tu menú de pausa (mostrarlo en pantalla, etc.)
     }
 
-    public void Reanudar()
+    public void ReanudarJuego()
     {
-        juegopausado = false;
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
+        juegoPausado = false;
         menuPausa.SetActive(false);
+
+
     }
 
-    public void ResetGame()
+
+    public void AbrirMenuOpciones()
     {
-        Time.timeScale = 1f;
+        enMenuOpciones = true;
+        menuPausa.SetActive(false);
+        menuOpciones.SetActive(true);
+        // Aquí puedes personalizar tu menú de opciones (mostrarlo en pantalla, etc.)
+    }
+
+    public void VolverAMenuPausa()
+    {
+        enMenuOpciones = false;
+        menuOpciones.SetActive(false);
+        menuPausa.SetActive(true);
+        // Aquí puedes personalizar la transición de vuelta al menú de pausa
+    }
+
+    public void ReiniciarJuego()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Asegúrate de restablecer el tiempo a su escala normal después de reiniciar
+        Time.timeScale = 1;
     }
 
-    public void ActivarMenuOpciones()
+    public void SalirAlMenuPrincipal()
     {
-        if (!juegopausado)
+        Debug.Log("Saliendo al menú principal...");
+
+        if (juegoPausado || enMenuOpciones)
         {
-            Pausa();
+            Time.timeScale = 1;
         }
 
-        menuPausa.SetActive(false);
-        OpenOptionsMenu();
+        SceneManager.LoadScene("Main menu");
     }
 
-    public void CambiarAEscena(string nombreDeEscena)
+    // Método que puedes asociar al botón de "Play" en tu interfaz de usuario
+    public void BotonReanudar()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(nombreDeEscena);
+        ReanudarJuego();
     }
 
-    public void OpenOptionsMenu()
+    // Método que puedes asociar al botón de reinicio en tu interfaz de usuario
+    public void BotonReiniciar()
     {
-        StartCoroutine(PlayAndOpenOptionsMenu());
-    }
-
-    IEnumerator PlayAndOpenOptionsMenu()
-    {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        CloseMainMenu();
-        optionsMenu.SetActive(true);
-        isOptionMenuOpen = true;
-    }
-
-    public void CloseOptionsMenu()
-    {
-        StartCoroutine(PlayAndCloseOptionsMenu());
-    }
-
-    IEnumerator PlayAndCloseOptionsMenu()
-    {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        optionsMenu.SetActive(false);
-        isOptionMenuOpen = false;
-        ShowMainMenu();
-    }
-
-    private void CloseMainMenu()
-    {
-        pauseContainer.SetActive(false);
-    }
-
-    private void ShowMainMenu()
-    {
-        pauseContainer.SetActive(true);
+        ReiniciarJuego();
     }
 }

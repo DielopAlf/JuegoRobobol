@@ -423,11 +423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5cc1949410e7ac4eaa697ba716c0683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsMenu: {fileID: 988434382}
   menuPausa: {fileID: 1405737282}
-  creditsCanvas: {fileID: 0}
-  pauseContainer: {fileID: 988434382}
-  audioSource: {fileID: 831430578}
+  menuOpciones: {fileID: 988434382}
+  buttonAudioSource: {fileID: 831430578}
 --- !u!4 &114894163
 Transform:
   m_ObjectHideFlags: 0
@@ -961,6 +959,7 @@ GameObject:
   - component: {fileID: 420228605}
   - component: {fileID: 420228604}
   - component: {fileID: 420228608}
+  - component: {fileID: 420228609}
   m_Layer: 5
   m_Name: salir
   m_TagString: Untagged
@@ -1045,9 +1044,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114894162}
-        m_TargetAssemblyTypeName: Menupausa, Assembly-CSharp
-        m_MethodName: CambiarAEscena
-        m_Mode: 5
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: SalirAlMenuPrincipal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1152,6 +1151,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &420228609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420228602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae39897fe1339ba45ae18ddf481b316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionAnimacion: 0.2
 --- !u!1 &423980972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,6 +1780,7 @@ GameObject:
   - component: {fileID: 678466830}
   - component: {fileID: 678466829}
   - component: {fileID: 678466832}
+  - component: {fileID: 678466833}
   m_Layer: 5
   m_Name: Jugar
   m_TagString: Untagged
@@ -1852,8 +1865,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114894162}
-        m_TargetAssemblyTypeName: Menupausa, Assembly-CSharp
-        m_MethodName: Reanudar
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ReanudarJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1946,6 +1959,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &678466833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678466827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae39897fe1339ba45ae18ddf481b316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionAnimacion: 0.2
 --- !u!1 &690190286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,6 +3157,7 @@ GameObject:
   - component: {fileID: 1013010213}
   - component: {fileID: 1013010212}
   - component: {fileID: 1013010215}
+  - component: {fileID: 1013010217}
   m_Layer: 5
   m_Name: opciones
   m_TagString: Untagged
@@ -3215,8 +3242,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114894162}
-        m_TargetAssemblyTypeName: Menupausa, Assembly-CSharp
-        m_MethodName: OpenOptionsMenu
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: AbrirMenuOpciones
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3310,6 +3337,19 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &1013010216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013010210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae39897fe1339ba45ae18ddf481b316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionAnimacion: 0.2
+--- !u!114 &1013010217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4470,6 +4510,7 @@ GameObject:
   - component: {fileID: 1472500065}
   - component: {fileID: 1472500064}
   - component: {fileID: 1472500068}
+  - component: {fileID: 1472500069}
   m_Layer: 5
   m_Name: reiniciar
   m_TagString: Untagged
@@ -4555,7 +4596,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 114894162}
         m_TargetAssemblyTypeName: Menupausa, Assembly-CSharp
-        m_MethodName: ResetGame
+        m_MethodName: ReiniciarJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4661,6 +4702,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1472500069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472500062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae39897fe1339ba45ae18ddf481b316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionAnimacion: 0.2
 --- !u!1 &1614221346
 GameObject:
   m_ObjectHideFlags: 0
@@ -5278,8 +5332,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114894162}
-        m_TargetAssemblyTypeName: Menupausa, Assembly-CSharp
-        m_MethodName: CloseOptionsMenu
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: VolverAMenuPausa
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

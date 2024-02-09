@@ -39,6 +39,6 @@ public class AnimacionBoton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     // Función para escalar gradualmente el objeto
     private void EscalarGradualmente(Vector3 objetivo)
     {
-        LeanTween.scale(gameObject, objetivo, duracionAnimacion);
+        LeanTween.scale(gameObject, objetivo, duracionAnimacion).setIgnoreTimeScale(true);
     }
 }

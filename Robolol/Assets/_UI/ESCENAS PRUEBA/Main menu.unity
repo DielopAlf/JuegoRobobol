@@ -4289,9 +4289,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448953733}
-        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
-        m_MethodName: Credits
+      - m_Target: {fileID: 1946387521}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4301,9 +4301,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1946387521}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 448953733}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: Credits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5678,6 +5678,11 @@ PrefabInstance:
       propertyPath: optionsButton
       value: 
       objectReference: {fileID: 1897097657}
+    - target: {fileID: 563449311023611993, guid: 7202d58787be27b41adb3f887728fda8,
+        type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 563449311023611993, guid: 7202d58787be27b41adb3f887728fda8,
         type: 3}
       propertyPath: buttonAudioSource
