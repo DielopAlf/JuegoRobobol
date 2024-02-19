@@ -6,6 +6,9 @@ using TMPro;
 
 public class CambioColor : MonoBehaviour
 {
+
+    public TextMeshProUGUI startText;
+
     public TextMeshProUGUI playText;
     public TextMeshProUGUI exitText;
 
@@ -16,10 +19,18 @@ public class CambioColor : MonoBehaviour
     public TextMeshProUGUI backCreditsText;
 
      public TextMeshProUGUI resetText;
+
+
+    public void startTextYellow()
+    {
+        startText.color = Color.yellow;
+    }
+
+    public void startTextWhite()
+    {
+        startText.color = Color.white;
+    }
     
-
-
-
 
     public void PlayTextYellow()
     {

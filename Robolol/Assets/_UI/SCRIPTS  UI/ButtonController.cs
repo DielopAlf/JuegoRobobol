@@ -35,7 +35,7 @@ public class ButtonController : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(PlayAndLoadScene("ESCENA DE PRUEBA", 0.5f));
+        StartCoroutine(PlayAndLoadScene("ESCENA DE PRUEBA", 0.3f));
     }
 
     public void CloseGame()
@@ -59,7 +59,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndOpenOptionsMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         CloseMainMenu();
         optionsMenu.SetActive(true);
         isOptionMenuOpen = true;
@@ -73,7 +73,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndCloseOptionsMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         optionsMenu.SetActive(false);
         isOptionMenuOpen = false;
         ActivateMainMenu();
@@ -87,7 +87,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndShowCredits()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         CloseMainMenu();
         creditsCanvas.SetActive(true);
     }
@@ -100,7 +100,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndBackMainMenu()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         creditsCanvas.SetActive(false);
         ActivateMainMenu();
     }
@@ -113,7 +113,7 @@ public class ButtonController : MonoBehaviour
     IEnumerator PlayAndQuitGame()
     {
         PlayButtonSound();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         Application.Quit();
     }
 

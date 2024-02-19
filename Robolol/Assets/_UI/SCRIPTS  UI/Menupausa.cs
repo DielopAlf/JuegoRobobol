@@ -13,7 +13,7 @@ public class Menupausa : MonoBehaviour
     public GameObject menuPausa;
     public GameObject menuOpciones;
 
-    // Agrega un AudioSource para reproducir el sonido
+
 
     public AudioSource buttonAudioSource;
     private int selectedButtonIndex = 0;
@@ -61,45 +61,85 @@ public class Menupausa : MonoBehaviour
         Time.timeScale = 0;
         juegoPausado = true;
         menuPausa.SetActive(true);
-        // Aquí puedes personalizar tu menú de pausa (mostrarlo en pantalla, etc.)
+        
     }
 
     public void ReanudarJuego()
     {
+        StartCoroutine(WaitSeconds(0.3f));
+
+
+
+    }
+    public IEnumerator WaitSeconds(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Debug.Log("Esperar Fin" + Time.time);
+
         Time.timeScale = 1;
         juegoPausado = false;
         menuPausa.SetActive(false);
-
-
     }
-
 
     public void AbrirMenuOpciones()
     {
+        StartCoroutine(WaitSeconds1(0.3f));
+
+
+    }
+    public IEnumerator WaitSeconds1(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Debug.Log("Esperar Fin" + Time.time);
+
         enMenuOpciones = true;
         menuPausa.SetActive(false);
         menuOpciones.SetActive(true);
-        // Aquí puedes personalizar tu menú de opciones (mostrarlo en pantalla, etc.)
     }
-
     public void VolverAMenuPausa()
     {
-        enMenuOpciones = false;
-        menuOpciones.SetActive(false);
-        menuPausa.SetActive(true);
-        // Aquí puedes personalizar la transición de vuelta al menú de pausa
-    }
 
+        StartCoroutine(WaitSeconds2(0.3f));
+
+
+    }
+    public IEnumerator WaitSeconds2(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Debug.Log("Esperar Fin" + Time.time);
+
+        enMenuOpciones = false;
+        menuPausa.SetActive(true);
+        menuOpciones.SetActive(false);
+    }
     public void ReiniciarJuego()
     {
+        Debug.Log("Esperar Inicial" + Time.time);
+        StartCoroutine(WaitSeconds3(0.3f));
+        
+    }
+
+    public IEnumerator WaitSeconds3(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Debug.Log("Esperar Fin" + Time.time);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        // Asegúrate de restablecer el tiempo a su escala normal después de reiniciar
+
         Time.timeScale = 1;
     }
 
     public void SalirAlMenuPrincipal()
     {
         Debug.Log("Saliendo al menú principal...");
+        StartCoroutine(WaitSeconds4(0.3f));
+
+
+    }
+    public IEnumerator WaitSeconds4(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Debug.Log("Esperar Fin" + Time.time);
 
         if (juegoPausado || enMenuOpciones)
         {
@@ -109,13 +149,12 @@ public class Menupausa : MonoBehaviour
         SceneManager.LoadScene("Main menu");
     }
 
-    // Método que puedes asociar al botón de "Play" en tu interfaz de usuario
     public void BotonReanudar()
     {
         ReanudarJuego();
     }
 
-    // Método que puedes asociar al botón de reinicio en tu interfaz de usuario
+    
     public void BotonReiniciar()
     {
         ReiniciarJuego();
