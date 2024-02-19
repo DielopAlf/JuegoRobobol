@@ -32,7 +32,7 @@ public class controlcinematica : MonoBehaviour
         yield return new WaitForSecondsRealtime(seconds);
        
 
-                SceneManager.LoadScene("Main menu");
+                SceneManager.LoadScene("Cinematica");
 
     }
 }
