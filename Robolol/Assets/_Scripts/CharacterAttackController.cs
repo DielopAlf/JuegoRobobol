@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterAttackController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class CharacterAttackController : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
         {
             attacking = true;
+            CharacterMovementController.instance.attacking = true;
         }
         if (attacking == true)
         {
@@ -30,6 +32,7 @@ public class CharacterAttackController : MonoBehaviour
         }
         if (attackDuration <= 0)
         {
+            CharacterMovementController.instance.attacking = false;
             attacking = false;
             attackDuration = attackDurationTime;
             cooldown = true;
