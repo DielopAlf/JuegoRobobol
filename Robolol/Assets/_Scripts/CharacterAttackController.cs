@@ -10,6 +10,8 @@ public class CharacterAttackController : MonoBehaviour
     public float attackCooldownTime;
     private bool attacking = false;
     private bool cooldown = false;
+    [SerializeField]
+    Animator animator;
 
     private void Start()
     {
@@ -41,6 +43,8 @@ public class CharacterAttackController : MonoBehaviour
             cooldown = false;
             attackCooldown = attackCooldownTime;
         }
+
+        animator.SetBool("Attacking", attacking);
     }
 
     private void OnTriggerStay(Collider other)

@@ -8,9 +8,13 @@ public class CharacterMovementController : MonoBehaviour
     public float speed = 10f;
     public float rotationSpeed = 720f;
     CharacterController characterController;
+    [SerializeField]
+    Animator animator;
+    bool IsMoving = false;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
     }
     private void FixedUpdate()
@@ -36,6 +40,16 @@ public class CharacterMovementController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
         }
+        if (movement != Vector3.zero) 
+        { 
+            IsMoving = true;
+        }
+        else
+        {
+            IsMoving = false;
+        }
+
+        animator.SetBool("IsMoving", IsMoving);
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
