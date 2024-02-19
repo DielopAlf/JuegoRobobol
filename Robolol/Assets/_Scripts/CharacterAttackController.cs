@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class CharacterAttackController : MonoBehaviour
 {
+    public static CharacterAttackController instance;
     private float attackDuration;
     public float attackDurationTime;
     private float attackCooldown;
@@ -13,7 +15,17 @@ public class CharacterAttackController : MonoBehaviour
     private bool cooldown = false;
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    Animator monster;
+    public bool enemyDead = false;
 
+    [SerializeField]
+    GameObject robot;
+    public float valor = 2;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         attackDuration = attackDurationTime;
@@ -23,6 +35,7 @@ public class CharacterAttackController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
         {
+            robot.transform.Translate(Vector3.forward * valor * Time.deltaTime);
             attacking = true;
             CharacterMovementController.instance.attacking = true;
         }
@@ -56,10 +69,19 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (attacking == true)
             {
-                EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
-                Destroy(other.gameObject);
+                StartCoroutine(enemyHit());
             }
         }
+        IEnumerator enemyHit()
+        {
+            monster.SetBool("IsDead", enemyDead);
+            enemyDead = true;
+            other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            //other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            yield return new WaitForSeconds(2);
+            EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
+            Destroy(other.gameObject);
+        }
     }
-
 }
+
