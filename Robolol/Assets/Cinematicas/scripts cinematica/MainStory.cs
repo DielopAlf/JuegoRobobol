@@ -21,7 +21,7 @@ public class MainStory : MonoBehaviour
             ActivarBoton();
         }
 
-        // Llamar a saltar_video al pulsar la tecla Escape si se ha presionado un botón
+        
         if (botonVisible && Input.GetKeyDown(KeyCode.Escape))
         {
             saltar_video();
@@ -33,7 +33,7 @@ public class MainStory : MonoBehaviour
         botonJuego.gameObject.SetActive(true);
         botonVisible = true;
 
-        // Invocar la función para desactivar el botón después de 6 segundos
+        
         Invoke("DesactivarBoton", 3f);
     }
 
@@ -45,6 +45,6 @@ public class MainStory : MonoBehaviour
 
     public void saltar_video()
     {
-        SceneManager.LoadScene("ESCENA DE PRUEBA");
+        SceneManager.LoadScene("Intro Scene");
     }
 }

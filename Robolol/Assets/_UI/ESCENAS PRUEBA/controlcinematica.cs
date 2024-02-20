@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+
 public class controlcinematica : MonoBehaviour
 {
     public Button playButton;
@@ -32,7 +33,8 @@ public class controlcinematica : MonoBehaviour
         yield return new WaitForSecondsRealtime(seconds);
        
 
-                SceneManager.LoadScene("Cinematica");
+                SceneManager.LoadScene("Main menu");
 
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine.Video;
 
 public class CambioEscena : MonoBehaviour
 {
-    public VideoPlayer videoPlayer; // Asigna tu componente VideoPlayer en el Inspector
+    public VideoPlayer videoPlayer; 
 
     void Start()
     {
@@ -20,15 +20,13 @@ public class CambioEscena : MonoBehaviour
 
     void OnVideoTerminado(VideoPlayer vp)
     {
-        // Este método se llama cuando el video llega al final
+        
         CargarSiguienteEscena();
     }
 
     void CargarSiguienteEscena()
     {
-        // Aquí defines el índice o el nombre de la siguiente escena que quieres cargar
-        // Puedes usar SceneManager.LoadScene("NombreDeLaSiguienteEscena") o SceneManager.LoadScene(1) por ejemplo
-        // Asegúrate de que la escena esté incluida en la compilación en Build Settings.
-        SceneManager.LoadScene("ESCENA DE PRUEBA");
+        
+        SceneManager.LoadScene("Intro Scene");
     }
 }
