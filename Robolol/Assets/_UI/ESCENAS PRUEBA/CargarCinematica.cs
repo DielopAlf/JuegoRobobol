@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class CargarCinematica : MonoBehaviour
+public class CargarEscena : MonoBehaviour
 {
     
     public float tiempoInactividad = 10f;
