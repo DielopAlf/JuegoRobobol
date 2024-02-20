@@ -19,7 +19,8 @@ public class ControlVideos : MonoBehaviour
         
         if (reproducirSiguiente)
         {
-            
+
+            videoPlayer1.Stop();
             videoPlayer2.Play();
             reproducirSiguiente = false;
         }
