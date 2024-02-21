@@ -1052,7 +1052,6 @@ MonoBehaviour:
   attackDurationTime: 1.5
   attackCooldownTime: 1.5
   animator: {fileID: 0}
-  monster: {fileID: 0}
   enemyDead: 0
   robot: {fileID: 0}
   valor: 2
@@ -2002,7 +2001,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1832988312}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -2168,6 +2167,7 @@ MonoBehaviour:
   hitTimer: 1
   knockback: 10
   initialAngle: 0
+  inputLock: 0
 --- !u!143 &508227486
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2628,7 +2628,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1832988312}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -2993,7 +2993,7 @@ GameObject:
   - component: {fileID: 655630781}
   - component: {fileID: 655630780}
   - component: {fileID: 655630779}
-  - component: {fileID: 655630782}
+  - component: {fileID: 655630783}
   m_Layer: 3
   m_Name: Hitbox
   m_TagString: Hitbox
@@ -3010,8 +3010,8 @@ Transform:
   m_GameObject: {fileID: 655630776}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.002, y: 0.626, z: 1.4820004}
-  m_LocalScale: {x: 0.89702046, y: 0.9807365, z: 1.4715366}
+  m_LocalPosition: {x: 0.002, y: 1.01, z: 1.4820004}
+  m_LocalScale: {x: 2.5286112, y: 1.848296, z: 1.4715366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1936138287}
@@ -3087,7 +3087,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655630776}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &655630782
+--- !u!114 &655630783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3096,16 +3096,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 655630776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d0c9f2020a5344a8d260544fdf7b56, type: 3}
+  m_Script: {fileID: 11500000, guid: e1905f73af99a73419467cc81cfda371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDurationTime: 0.6
-  attackCooldownTime: 0.6
+  attackDurationTime: 1
+  attackCooldownTime: 2.5
   animator: {fileID: 1936138288}
-  monster: {fileID: 1554664563}
   enemyDead: 0
   robot: {fileID: 1936138289}
-  valor: 20
+  valor: 1
 --- !u!1 &678466827
 GameObject:
   m_ObjectHideFlags: 0
@@ -5571,7 +5570,7 @@ GameObject:
   - component: {fileID: 1340608047}
   - component: {fileID: 1340608046}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: NavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6828,7 +6827,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1527106896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398da6a898ae66d47b874e9980b3a9bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c918ddca73a9d14c850dcd9d19d6f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList: []
@@ -7453,12 +7452,6 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 1554664565}
   m_SourcePrefab: {fileID: 100100000, guid: b1982ba4e1aa5d043852dd5d431e7bfb, type: 3}
---- !u!95 &1554664563 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7658858348012394586, guid: b1982ba4e1aa5d043852dd5d431e7bfb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1554664562}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1554664564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 847869476329942161, guid: b1982ba4e1aa5d043852dd5d431e7bfb,
@@ -7474,7 +7467,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1554664564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300fed1e9f5025344838348d5ccf3e56, type: 3}
+  m_Script: {fileID: 11500000, guid: 11609cb42fe6ca4469d31629c4294796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1936138287}
@@ -8335,10 +8328,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832988309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5274cf18b859c0942981c44e07dfb27e, type: 3}
+  m_Script: {fileID: 11500000, guid: 508698d430e673546a038c2aec1fa8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalEnemies: 0
   defeatScreen: {fileID: 1339694482}
   victoryScreen: {fileID: 771604204}
 --- !u!1 &1845440924
@@ -8926,15 +8918,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8294105675027732134, guid: bb86c21716caaaf499ee025d3a4e799d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1936138292}
-    - targetCorrespondingSourceObject: {fileID: 8294105675027732134, guid: bb86c21716caaaf499ee025d3a4e799d,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1936138291}
     - targetCorrespondingSourceObject: {fileID: 8294105675027732134, guid: bb86c21716caaaf499ee025d3a4e799d,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1936138290}
+    - targetCorrespondingSourceObject: {fileID: 8294105675027732134, guid: bb86c21716caaaf499ee025d3a4e799d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1936138292}
   m_SourcePrefab: {fileID: 100100000, guid: bb86c21716caaaf499ee025d3a4e799d, type: 3}
 --- !u!4 &1936138287 stripped
 Transform:
@@ -9010,17 +9002,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1936138289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d66ef3abc903f594abc5469a323d30e5, type: 3}
+  m_Script: {fileID: 11500000, guid: a80331abdbf611f469846c34e13b3a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
   rotationSpeed: 720
-  animator: {fileID: 1936138288}
+  animator: {fileID: 0}
   attacking: 0
   lives: 10
   hitTimer: 1
   knockback: 10
   initialAngle: 0
+  inputLock: 0
 --- !u!1 &1990007358
 GameObject:
   m_ObjectHideFlags: 0
