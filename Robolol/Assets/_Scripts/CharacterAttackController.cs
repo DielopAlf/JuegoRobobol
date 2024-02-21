@@ -15,8 +15,6 @@ public class CharacterAttackController : MonoBehaviour
     private bool cooldown = false;
     [SerializeField]
     Animator animator;
-    [SerializeField]
-    Animator monster;
     public bool enemyDead = false;
 
     [SerializeField]
@@ -33,34 +31,36 @@ public class CharacterAttackController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
+        if (CharacterMovementController.instance.inputLock != true)
         {
-            robot.transform.Translate(Vector3.forward * valor * Time.deltaTime);
-            attacking = true;
-            CharacterMovementController.instance.attacking = true;
-        }
-        if (attacking == true)
-        {
-            attackDuration -= Time.deltaTime;
-        }
-        if (attackDuration <= 0)
-        {
-            CharacterMovementController.instance.attacking = false;
-            attacking = false;
-            attackDuration = attackDurationTime;
-            cooldown = true;
-        }
-        if (cooldown == true)
-        {
-            attackCooldown -= Time.deltaTime;
-        }
-        if (attackCooldown <= 0)
-        {
-            cooldown = false;
-            attackCooldown = attackCooldownTime;
-        }
+            if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
+            {
+                attacking = true;
+                CharacterMovementController.instance.attacking = true;
+            }
+            if (attacking == true)
+            {
+                attackDuration -= Time.deltaTime;
+            }
+            if (attackDuration <= 0)
+            {
+                CharacterMovementController.instance.attacking = false;
+                attacking = false;
+                attackDuration = attackDurationTime;
+                cooldown = true;
+            }
+            if (cooldown == true)
+            {
+                attackCooldown -= Time.deltaTime;
+            }
+            if (attackCooldown <= 0)
+            {
+                cooldown = false;
+                attackCooldown = attackCooldownTime;
+            }
 
-        animator.SetBool("Attacking", attacking);
+            animator.SetBool("Attacking", attacking);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -74,13 +74,13 @@ public class CharacterAttackController : MonoBehaviour
         }
         IEnumerator enemyHit()
         {
-            monster.SetBool("IsDead", enemyDead);
             enemyDead = true;
-            other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            //other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            yield return new WaitForSeconds(2);
+            Destroy(other.GetComponent<CharacterMovementController>());
+            yield return new WaitForSeconds(1.5f);
+            other.GetComponent<Animator>().SetBool("IsDead", enemyDead);
             EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
             Destroy(other.gameObject);
+
         }
     }
 }

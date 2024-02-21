@@ -13,6 +13,7 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField]
     Animator animator;
     bool IsMoving = false;
+    bool IsMovingBack = false;
     public bool attacking = false;
 
     public int lives = 3;
@@ -21,6 +22,9 @@ public class CharacterMovementController : MonoBehaviour
     public float knockback = 10;
     [SerializeField]
     float initialAngle;
+
+    bool inmunity = false;
+    public bool inputLock = false;
     private void Awake()
     {
         instance = this;
@@ -32,7 +36,7 @@ public class CharacterMovementController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (attacking != true)
+        if (attacking != true && inputLock != true)
         {
             Debug.Log(lives);
 
@@ -57,7 +61,7 @@ public class CharacterMovementController : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
                 }
             }
-            if (movement != Vector3.zero)
+            if (movement != Vector3.zero && IsMovingBack == false)
             {
                 IsMoving = true;
             }
@@ -78,20 +82,29 @@ public class CharacterMovementController : MonoBehaviour
     {
         Debug.Log("Player has been hit");
 
-        if (other.tag == "Enemy" && lives != 0)
+        if (other.tag == "Enemy" && lives != 0 && inmunity ==false)
         {
             StartCoroutine(Hit());
-            other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * knockback, ForceMode.Impulse);
+            //other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * knockback, ForceMode.Impulse);
             Debug.Log("Player has been hit by an enemy");
         }
-        if (other.tag == "Enemy" && lives == 0)
+        if (other.tag == "Enemy" && lives <= 0)
         {
-            gameObject.SetActive(false);
+            StartCoroutine(Dead());
         }
+    }
+    IEnumerator Dead()
+    {
+        inputLock = true;
+        animator.SetBool("IsDead", true);
+        yield return new WaitForSeconds(2);
+        gameObject.SetActive (false);
     }
     IEnumerator Hit()
     {
+        inmunity = true;
         lives--;
         yield return new WaitForSeconds(hitTimer);
+        inmunity = false;
     }
 }
