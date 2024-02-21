@@ -23,6 +23,11 @@ public class CharacterAttackController : MonoBehaviour
 
     [SerializeField]
     GameObject blood;
+
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]    
+    AudioClip punch;
     private void Awake()
     {
         instance = this;
@@ -38,6 +43,8 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
             {
+                audioSource.clip = punch;
+                audioSource.Play();
                 attacking = true;
                 CharacterMovementController.instance.attacking = true;
             }

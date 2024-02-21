@@ -25,6 +25,12 @@ public class CharacterMovementController : MonoBehaviour
 
     bool inmunity = false;
     public bool inputLock = false;
+
+    //Audio:
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip walk;
     private void Awake()
     {
         instance = this;
@@ -61,9 +67,11 @@ public class CharacterMovementController : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
                 }
             }
-            if (movement != Vector3.zero && IsMovingBack == false)
+            if (movement != Vector3.zero)
             {
                 IsMoving = true;
+                audioSource.clip = walk;
+                audioSource.Play();
             }
             else
             {

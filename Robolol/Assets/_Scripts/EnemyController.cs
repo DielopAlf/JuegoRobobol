@@ -22,6 +22,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     float initialAngle;
 
+    //Sound:
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip jump, walk;
+
     private void Start()
     {            
         agent = GetComponent<NavMeshAgent>();
@@ -30,6 +36,11 @@ public class EnemyController : MonoBehaviour
     }
     private void Update()
     {
+        if (gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        {
+            audioSource.clip = walk;
+            audioSource.Play();
+        }
             if (Vector3.Distance(gameObject.transform.position, player.position) <= distanceJump && OnTheFloor == true)
             {
                 OnTheFloor = false;
@@ -61,6 +72,8 @@ public class EnemyController : MonoBehaviour
     }
     IEnumerator Jump()
     {
+        audioSource.clip = jump;
+        audioSource.Play();
         Debug.Log("Has stopped");
         agent.enabled = false;
         var rigid = GetComponent<Rigidbody>();
