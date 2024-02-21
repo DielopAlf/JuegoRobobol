@@ -15,8 +15,11 @@ public class ButtonController : MonoBehaviour
     public AudioSource buttonAudioSource;
     private int selectedButtonIndex = 0;
 
+   
+
     void Start()
     {
+        Time.timeScale = 1.0f;
         optionsMenu.SetActive(false);
 
         if (buttonAudioSource == null)

@@ -1318,8 +1318,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
+      - m_Target: {fileID: 1832988312}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
@@ -6829,8 +6829,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
+      - m_Target: {fileID: 1832988312}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -7456,8 +7456,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
+      - m_Target: {fileID: 1832988312}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
@@ -7927,7 +7927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1905f73af99a73419467cc81cfda371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDurationTime: 1
+  attackDurationTime: 0.6
   attackCooldownTime: 2.5
   animator: {fileID: 1936138288}
   enemyDead: 0
@@ -10606,8 +10606,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: pantallasfinales, Assembly-CSharp
+      - m_Target: {fileID: 1832988312}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
