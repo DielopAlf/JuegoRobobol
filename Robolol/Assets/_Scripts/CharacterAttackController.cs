@@ -20,6 +20,9 @@ public class CharacterAttackController : MonoBehaviour
     [SerializeField]
     GameObject robot;
     public float valor = 2;
+
+    [SerializeField]
+    GameObject blood;
     private void Awake()
     {
         instance = this;
@@ -75,8 +78,10 @@ public class CharacterAttackController : MonoBehaviour
         IEnumerator enemyHit()
         {
             enemyDead = true;
+            Instantiate(blood, other.transform.position, Quaternion.identity);
             Destroy(other.GetComponent<CharacterMovementController>());
             yield return new WaitForSeconds(1.5f);
+            Destroy(GameObject.FindGameObjectWithTag("Blood"));
             other.GetComponent<Animator>().SetBool("IsDead", enemyDead);
             EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
             Destroy(other.gameObject);
