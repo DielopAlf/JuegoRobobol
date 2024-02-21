@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/_UI/ESCENAS PRUEBA/Intro Scene.unity
+    path: Assets/Scenes/Intro Scene.unity
     guid: 762bb0caf04b2f749a53c0b00d187720
   - enabled: 1
-    path: Assets/Cinematicas/Cinematica.unity
+    path: Assets/Cinematicas/escena/Cinematica.unity
     guid: c2129d44d1415474b9bd5179f6d41c01
   - enabled: 1
-    path: Assets/_UI/ESCENAS PRUEBA/ESCENA DE PRUEBA.unity
+    path: Assets/Scenes/ESCENA DE PRUEBA.unity
     guid: 813bedc724804e24ba363162d47aa654
   - enabled: 1
-    path: Assets/_UI/ESCENAS PRUEBA/Main menu.unity
+    path: Assets/Scenes/Main menu.unity
     guid: 2417a9224f91ea647a575dbcdf88e437
   m_configObjects: {}
