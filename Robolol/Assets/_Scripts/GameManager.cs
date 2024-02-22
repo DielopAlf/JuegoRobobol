@@ -7,6 +7,17 @@ public class GameManager : MonoBehaviour
 {
     public GameObject defeatScreen;
     public GameObject victoryScreen;
+
+    [SerializeField]
+    AudioSource audioSource;
+
+    [SerializeField]
+    AudioClip Victoria;
+
+  
+    [SerializeField]
+    AudioClip Derrota;
+
     private void Start()
     {
         Time.timeScale = 1.0f;
@@ -15,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player") == null)
         {
+            audioSource.clip = Derrota;
+            audioSource.Play();
             Time.timeScale = 0;
             defeatScreen.SetActive(true);
             Debug.Log("Game Over - Player Died");
@@ -25,6 +38,8 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Enemy") == null)
         {
+            audioSource.clip = Victoria;
+            audioSource.Play();
             Time.timeScale = 0;
             victoryScreen.SetActive(true);
             Debug.Log("Victory - All enemies defeated");
