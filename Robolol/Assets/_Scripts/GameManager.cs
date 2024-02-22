@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AudioClip Victoria;
 
-  
+    private bool gameOver = false;
+
     [SerializeField]
     AudioClip Derrota;
 
@@ -26,6 +27,9 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player") == null)
         {
+            gameOver = true;
+
+            audioSource.Stop(); // Detiene cualquier sonido que esté reproduciéndose
             audioSource.clip = Derrota;
             audioSource.Play();
             Time.timeScale = 0;
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Enemy") == null)
         {
+            gameOver = true;
+            audioSource.Stop(); // Detiene cualquier sonido que esté reproduciéndose
             audioSource.clip = Victoria;
             audioSource.Play();
             Time.timeScale = 0;
@@ -47,6 +53,8 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
+        gameOver = false;
+
         Time.timeScale = 1;
         defeatScreen.SetActive(false);
         victoryScreen.SetActive(false);
@@ -56,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        gameOver = false;
+
         Time.timeScale = 1;
         SceneManager.LoadScene("Main menu");
     }
