@@ -12,45 +12,45 @@ public class GameManager : MonoBehaviour
     AudioSource audioSource;
 
     [SerializeField]
-    AudioClip Victoria;
+    AudioClip victorySound;
 
     private bool gameOver = false;
 
     [SerializeField]
-    AudioClip Derrota;
+    AudioClip defeatSound;
 
     private void Start()
     {
         Time.timeScale = 1.0f;
     }
+
     private void Update()
     {
         if (GameObject.FindGameObjectWithTag("Player") == null)
         {
+            GameOver(defeatScreen, defeatSound, "Game Over - Player Died");
+        }
+
+        if (GameObject.FindGameObjectWithTag("Enemy") == null)
+        {
+            GameOver(victoryScreen, victorySound, "Victory - All enemies defeated");
+        }
+    }
+
+    void GameOver(GameObject endScreen, AudioClip sound, string debugMessage)
+    {
+        if (!gameOver)
+        {
             gameOver = true;
 
             audioSource.Stop(); // Detiene cualquier sonido que esté reproduciéndose
-            audioSource.clip = Derrota;
-            audioSource.Play();
+            audioSource.PlayOneShot(sound);
             Time.timeScale = 0;
-            defeatScreen.SetActive(true);
-            Debug.Log("Game Over - Player Died");
-        }
-        if (GameObject.FindGameObjectWithTag("Enemy") != null)
-        {
-            Debug.Log("Hay Enemigos");
-        }
-        if (GameObject.FindGameObjectWithTag("Enemy") == null)
-        {
-            gameOver = true;
-            audioSource.Stop(); // Detiene cualquier sonido que esté reproduciéndose
-            audioSource.clip = Victoria;
-            audioSource.Play();
-            Time.timeScale = 0;
-            victoryScreen.SetActive(true);
-            Debug.Log("Victory - All enemies defeated");
+            endScreen.SetActive(true);
+            Debug.Log(debugMessage);
         }
     }
+
     public void RestartGame()
     {
         gameOver = false;

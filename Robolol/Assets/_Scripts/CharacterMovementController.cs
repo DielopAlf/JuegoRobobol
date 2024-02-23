@@ -15,6 +15,7 @@ public class CharacterMovementController : MonoBehaviour
     bool IsMoving = false;
     bool IsMovingBack = false;
     public bool attacking = false;
+    private bool wasMoving = false;
 
     public int lives = 3;
     public float hitTimer = 1;
@@ -40,51 +41,59 @@ public class CharacterMovementController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
     }
-    private void FixedUpdate()
+private void FixedUpdate()
+{
+    if (attacking != true && inputLock != true)
     {
-        if (attacking != true && inputLock != true)
+        Debug.Log(lives);
+
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(x, 0, y);
+        movement.Normalize();
+
+        // Solo cambia la rotación si hay movimiento
+        if (movement != Vector3.zero)
         {
-            Debug.Log(lives);
-
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-
-            Vector3 movement = new Vector3(x, 0, y);
-            movement.Normalize();
-
-            characterController.Move(movement * speed * Time.deltaTime);
-
-            if (EnemyDetectionAreaController.instance.enemyInRange == true)
-            {
-                gameObject.transform.LookAt(new Vector3(EnemyDetectionAreaController.instance.enemyTransform.x, gameObject.transform.position.y, EnemyDetectionAreaController.instance.enemyTransform.z));
-            }
-            else
-            {
-                if (movement != Vector3.zero)
-                {
-                    Quaternion toRotation = Quaternion.LookRotation(movement);
-
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-                }
-            }
-            if (movement != Vector3.zero)
-            {
-                IsMoving = true;
-                audioSource.clip = walk;
-                audioSource.Play();
-            }
-            else
-            {
-                IsMoving = false;
-            }
-
-            animator.SetBool("IsMoving", IsMoving);
-
-            if (hitTimer <= 0)
-            {
-                hitTimer = 1;
-            }
+            Quaternion toRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+
+        // Controla el estado de movimiento para la animación
+        IsMoving = movement != Vector3.zero;
+        animator.SetBool("IsMoving", IsMoving);
+
+        // Reproduce el sonido de caminar solo cuando el personaje comienza a moverse
+        if (IsMoving && !wasMoving)
+        {
+            audioSource.clip = walk;
+            audioSource.Play();
+        }
+
+        // Detiene el sonido si el personaje se detiene
+        if (!IsMoving && wasMoving)
+        {
+            audioSource.Stop();
+        }
+
+        wasMoving = IsMoving;
+
+        // Mueve al personaje
+        characterController.Move(movement * speed * Time.deltaTime);
+
+        if (EnemyDetectionAreaController.instance.enemyInRange == true)
+        {
+            gameObject.transform.LookAt(new Vector3(EnemyDetectionAreaController.instance.enemyTransform.x, gameObject.transform.position.y, EnemyDetectionAreaController.instance.enemyTransform.z));
+        }
+
+        if (hitTimer <= 0)
+        {
+            hitTimer = 1;
+        }
+    }
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
