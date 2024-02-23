@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CharacterMovementController : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class CharacterMovementController : MonoBehaviour
     bool IsMovingBack = false;
     public bool attacking = false;
     private bool wasMoving = false;
+    public TMP_Text livesText; 
 
     public int lives = 3;
     public float hitTimer = 1;
@@ -32,6 +35,11 @@ public class CharacterMovementController : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     AudioClip walk;
+    [SerializeField]
+    AudioClip damageSound;
+
+
+
     private void Awake()
     {
         instance = this;
@@ -40,6 +48,8 @@ public class CharacterMovementController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+                UpdateLivesText();
+
     }
 private void FixedUpdate()
 {
@@ -117,11 +127,16 @@ private void FixedUpdate()
         yield return new WaitForSeconds(2);
         gameObject.SetActive (false);
     }
-    IEnumerator Hit()
+   IEnumerator Hit()
     {
         inmunity = true;
         lives--;
+         UpdateLivesText(); 
         yield return new WaitForSeconds(hitTimer);
         inmunity = false;
+    }
+    private void UpdateLivesText()
+    {
+        livesText.text = "Vidas = " + lives.ToString();
     }
 }
