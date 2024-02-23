@@ -38,8 +38,7 @@ public class EnemyController : MonoBehaviour
     {
         if (gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
         {
-            audioSource.clip = walk;
-            audioSource.Play();
+                  PlayWalkSound();
         }
             if (Vector3.Distance(gameObject.transform.position, player.position) <= distanceJump && OnTheFloor == true)
             {
@@ -54,6 +53,7 @@ public class EnemyController : MonoBehaviour
             if (agent.velocity != Vector3.zero)
             {
                 Movement = true;
+                PlayWalkSound();
             }
             else
             {
@@ -70,6 +70,15 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(JumpBack());
         }
     }
+    private void PlayWalkSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = walk;
+            audioSource.Play();
+        }
+    }
+
     IEnumerator Jump()
     {
         audioSource.clip = jump;

@@ -20,6 +20,14 @@ public class CambioColor : MonoBehaviour
 
      public TextMeshProUGUI resetText;
 
+     public TextMeshProUGUI retryText;
+
+     public TextMeshProUGUI retry2Text;
+
+     public TextMeshProUGUI back2Text;
+
+     public TextMeshProUGUI back3Text;
+
 
     public void startTextYellow()
     {
@@ -97,5 +105,39 @@ public class CambioColor : MonoBehaviour
     {
        resetText.color = Color.white;
     }
+        public void retryTextYellow()
+    {
+        retryText.color = Color.yellow;
+    }
 
+    public void retryTextWhite()
+    {
+       retryText.color = Color.white;
+    }
+       public void back2TextYellow()
+    {
+        back2Text.color = Color.yellow;
+    }
+
+    public void back2TextWhite()
+    {
+       back2Text.color = Color.white;
+    }
+     public void retry2TextWhite()
+    {
+       retry2Text.color = Color.white;
+    }
+       public void retry2TextYellow()
+    {
+        retry2Text.color = Color.yellow;
+    }
+       public void back3TextYellow()
+    {
+        back3Text.color = Color.yellow;
+    }
+
+    public void back3TextWhite()
+    {
+       back3Text.color = Color.white;
+    }
 }

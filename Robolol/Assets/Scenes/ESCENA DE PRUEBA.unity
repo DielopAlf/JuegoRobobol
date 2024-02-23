@@ -751,6 +751,10 @@ MonoBehaviour:
   backText: {fileID: 1845440926}
   backCreditsText: {fileID: 0}
   resetText: {fileID: 794757812}
+  retryText: {fileID: 1054132398}
+  retry2Text: {fileID: 1401581625}
+  back2Text: {fileID: 86587471}
+  back3Text: {fileID: 601198523}
 --- !u!1 &115633557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,8 +1008,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -684.0255, y: 402.30914}
-  m_SizeDelta: {x: 444.4487, y: 171.3817}
+  m_AnchoredPosition: {x: -712.4487, y: 402.30914}
+  m_SizeDelta: {x: 387.6023, y: 171.3817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &241104475
 MonoBehaviour:
@@ -1236,6 +1240,7 @@ MonoBehaviour:
   blood: {fileID: 0}
   audioSource: {fileID: 0}
   punch: {fileID: 0}
+  hitEnemy: {fileID: 0}
 --- !u!65 &287992794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7180,6 +7185,8 @@ MonoBehaviour:
   inputLock: 0
   audioSource: {fileID: 0}
   walk: {fileID: 0}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!143 &508227486
 CharacterController:
   m_ObjectHideFlags: 0
@@ -8119,7 +8126,8 @@ MonoBehaviour:
   valor: 1
   blood: {fileID: 392458104021201408, guid: f95a6c6a72c981348bc981cc1e868776, type: 3}
   audioSource: {fileID: 1936138293}
-  punch: {fileID: 8300000, guid: c9f3c29b0685b5e4987c6815f1c8b2fb, type: 3}
+  punch: {fileID: 8300000, guid: 2a2e0445ee0027540b02ff7fba13008c, type: 3}
+  hitEnemy: {fileID: 8300000, guid: c9f3c29b0685b5e4987c6815f1c8b2fb, type: 3}
 --- !u!1 &678466827
 GameObject:
   m_ObjectHideFlags: 0
@@ -8643,7 +8651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.1927, y: 0}
+  m_AnchoredPosition: {x: 47, y: 0}
   m_SizeDelta: {x: 346.3854, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &779711667
@@ -12062,6 +12070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 258552917224559564, guid: b1982ba4e1aa5d043852dd5d431e7bfb,
         type: 3}
+      propertyPath: m_Volume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 258552917224559564, guid: b1982ba4e1aa5d043852dd5d431e7bfb,
+        type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -14200,6 +14213,8 @@ MonoBehaviour:
   inputLock: 0
   audioSource: {fileID: 1936138293}
   walk: {fileID: 8300000, guid: e88efb11d9a1e0b4cae6146eec182d43, type: 3}
+  damageSound: {fileID: 8300000, guid: e9c752121d3d15544bcb20274412ed12, type: 3}
+  deathSound: {fileID: 8300000, guid: b17ff76a2123cd746bbc6856a1960343, type: 3}
 --- !u!82 &1936138293
 AudioSource:
   m_ObjectHideFlags: 0

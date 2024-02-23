@@ -33,12 +33,16 @@ public class CharacterMovementController : MonoBehaviour
     //Audio:
     [SerializeField]
     AudioSource audioSource;
+
     [SerializeField]
     AudioClip walk;
+
+   [SerializeField]
+    AudioClip    damageSound;
+
+   
     [SerializeField]
-    AudioClip damageSound;
-
-
+    AudioClip deathSound;
 
     private void Awake()
     {
@@ -123,6 +127,8 @@ private void FixedUpdate()
     IEnumerator Dead()
     {
         inputLock = true;
+        PlayDeathSound();
+
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(2);
         gameObject.SetActive (false);
@@ -131,6 +137,8 @@ private void FixedUpdate()
     {
         inmunity = true;
         lives--;
+        PlayDamageSound();
+
          UpdateLivesText(); 
         yield return new WaitForSeconds(hitTimer);
         inmunity = false;
@@ -138,5 +146,21 @@ private void FixedUpdate()
     private void UpdateLivesText()
     {
         livesText.text = "Vidas = " + lives.ToString();
+    }
+     private void PlayDamageSound()
+    {
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.clip = damageSound;
+            audioSource.Play();
+        }
+     }
+      private void PlayDeathSound()
+    {
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.clip = deathSound;
+            audioSource.Play();
+        }
     }
 }

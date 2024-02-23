@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -13,6 +12,7 @@ public class CharacterAttackController : MonoBehaviour
     public float attackCooldownTime;
     private bool attacking = false;
     private bool cooldown = false;
+    private bool hasHitEnemy = false; // Nueva variable para rastrear si ya se ha golpeado al enemigo
     [SerializeField]
     Animator animator;
     public bool enemyDead = false;
@@ -26,17 +26,22 @@ public class CharacterAttackController : MonoBehaviour
 
     [SerializeField]
     AudioSource audioSource;
-    [SerializeField]    
+    [SerializeField]
     AudioClip punch;
+    [SerializeField]
+    AudioClip hitEnemy; // AudioClip para el sonido de golpear al enemigo
+
     private void Awake()
     {
         instance = this;
     }
+
     private void Start()
     {
         attackDuration = attackDurationTime;
         attackCooldown = attackCooldownTime;
     }
+
     private void Update()
     {
         if (CharacterMovementController.instance.inputLock != true)
@@ -51,6 +56,12 @@ public class CharacterAttackController : MonoBehaviour
             if (attacking == true)
             {
                 attackDuration -= Time.deltaTime;
+
+                // Si aún no ha golpeado al enemigo y el tiempo de duración es mayor que el tiempo deseado para golpear
+                if (!hasHitEnemy && attackDurationTime - attackDuration >= 0.1f)
+                {
+                    StartCoroutine(HitEnemySound());
+                }
             }
             if (attackDuration <= 0)
             {
@@ -58,6 +69,7 @@ public class CharacterAttackController : MonoBehaviour
                 attacking = false;
                 attackDuration = attackDurationTime;
                 cooldown = true;
+                hasHitEnemy = false; // Restablece la variable al final del ataque
             }
             if (cooldown == true)
             {
@@ -79,21 +91,35 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (attacking == true)
             {
-                StartCoroutine(enemyHit());
+                StartCoroutine(enemyHit(other.gameObject));
             }
         }
-        IEnumerator enemyHit()
-        {
-            enemyDead = true;
-            Instantiate(blood, other.transform.position, Quaternion.identity);
-            Destroy(other.GetComponent<CharacterMovementController>());
-            yield return new WaitForSeconds(1.5f);
-            Destroy(GameObject.FindGameObjectWithTag("Blood"));
-            other.GetComponent<Animator>().SetBool("IsDead", enemyDead);
-            EnemyDetectionAreaController.instance.enemyList.Remove(other.gameObject);
-            Destroy(other.gameObject);
+    }
 
+    IEnumerator HitEnemySound()
+    {
+        // Reproduce el sonido al golpear al enemigo
+        if (audioSource != null && hitEnemy != null)
+        {
+            audioSource.clip = hitEnemy;
+            audioSource.Play();
         }
+
+        hasHitEnemy = true; // Marca que ya se ha golpeado al enemigo
+
+        yield return null;
+    }
+
+    IEnumerator enemyHit(GameObject enemy)
+    {
+        enemyDead = true;
+        Instantiate(blood, enemy.transform.position, Quaternion.identity);
+        Destroy(enemy.GetComponent<CharacterMovementController>());
+        yield return new WaitForSeconds(1.5f);
+        Destroy(GameObject.FindGameObjectWithTag("Blood"));
+        enemy.GetComponent<Animator>().SetBool("IsDead", enemyDead);
+
+        EnemyDetectionAreaController.instance.enemyList.Remove(enemy);
+        Destroy(enemy);
     }
 }
-
