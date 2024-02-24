@@ -1,4 +1,4 @@
-using  System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -6,17 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Menupausa : MonoBehaviour
 {
-
     private bool juegoPausado = false;
     private bool enMenuOpciones = false;
 
     public GameObject menuPausa;
     public GameObject menuOpciones;
 
-
-
     public AudioSource buttonAudioSource;
+    public AudioSource musicAudioSource; // Agrega esta línea para la música
     private int selectedButtonIndex = 0;
+
     void Start()
     {
         menuOpciones.SetActive(false);
@@ -25,7 +24,13 @@ public class Menupausa : MonoBehaviour
         {
             Debug.LogError("Button Audio Source not assigned in the inspector.");
         }
+
+        if (musicAudioSource == null)
+        {
+            Debug.LogError("Music Audio Source not assigned in the inspector.");
+        }
     }
+
     void Update()
     {
         if (!enMenuOpciones && Input.GetKeyDown(KeyCode.Escape))
@@ -40,6 +45,7 @@ public class Menupausa : MonoBehaviour
             }
         }
     }
+
     public void PlayButtonHoverSound()
     {
         if (buttonAudioSource != null)
@@ -61,16 +67,31 @@ public class Menupausa : MonoBehaviour
         Time.timeScale = 0;
         juegoPausado = true;
         menuPausa.SetActive(true);
-        
+        PauseMusic();
     }
 
     public void ReanudarJuego()
     {
         StartCoroutine(WaitSeconds(0.3f));
-
-
-
+        ResumeMusic();
     }
+
+    private void PauseMusic()
+    {
+        if (musicAudioSource != null && musicAudioSource.isPlaying)
+        {
+            musicAudioSource.Pause();
+        }
+    }
+
+    private void ResumeMusic()
+    {
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.UnPause();
+        }
+    }
+
     public IEnumerator WaitSeconds(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
@@ -84,9 +105,8 @@ public class Menupausa : MonoBehaviour
     public void AbrirMenuOpciones()
     {
         StartCoroutine(WaitSeconds1(0.3f));
-
-
     }
+
     public IEnumerator WaitSeconds1(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
@@ -96,13 +116,12 @@ public class Menupausa : MonoBehaviour
         menuPausa.SetActive(false);
         menuOpciones.SetActive(true);
     }
+
     public void VolverAMenuPausa()
     {
-
         StartCoroutine(WaitSeconds2(0.3f));
-
-
     }
+
     public IEnumerator WaitSeconds2(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
@@ -112,11 +131,11 @@ public class Menupausa : MonoBehaviour
         menuPausa.SetActive(true);
         menuOpciones.SetActive(false);
     }
+
     public void ReiniciarJuego()
     {
         Debug.Log("Esperar Inicial" + Time.time);
         StartCoroutine(WaitSeconds3(0.3f));
-        
     }
 
     public IEnumerator WaitSeconds3(float seconds)
@@ -133,9 +152,8 @@ public class Menupausa : MonoBehaviour
     {
         Debug.Log("Saliendo al menú principal...");
         StartCoroutine(WaitSeconds4(0.3f));
-
-
     }
+
     public IEnumerator WaitSeconds4(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
@@ -154,7 +172,6 @@ public class Menupausa : MonoBehaviour
         ReanudarJuego();
     }
 
-    
     public void BotonReiniciar()
     {
         ReiniciarJuego();
