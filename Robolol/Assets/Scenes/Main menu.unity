@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 340290451}
   - component: {fileID: 340290450}
   m_Layer: 5
-  m_Name: musica
+  m_Name: Opciones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5704445}
-  m_AnchoredPosition: {x: -172, y: 96.58246}
+  m_AnchoredPosition: {x: -267, y: 96.58246}
   m_SizeDelta: {x: 265.6945, y: -17.1789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340290450
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Musica
+  m_text: Opciones
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 09b83a18f98307845bca4a423a480389, type: 2}
   m_sharedMaterial: {fileID: 3125960871876239918, guid: 09b83a18f98307845bca4a423a480389,
@@ -5193,7 +5193,7 @@ GameObject:
   - component: {fileID: 1902146956}
   - component: {fileID: 1902146955}
   m_Layer: 5
-  m_Name: Opciones
+  m_Name: musica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5215,7 +5215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -391, y: 93.41058}
+  m_AnchoredPosition: {x: -367, y: 93.41058}
   m_SizeDelta: {x: 265.6945, y: 58.8069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1902146955
@@ -5238,7 +5238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Opciones
+  m_text: Musica
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 09b83a18f98307845bca4a423a480389, type: 2}
   m_sharedMaterial: {fileID: 3125960871876239918, guid: 09b83a18f98307845bca4a423a480389,
@@ -5692,8 +5692,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 456891662}
-  - {fileID: 1902146954}
   - {fileID: 340290449}
+  - {fileID: 1902146954}
   - {fileID: 457761173}
   - {fileID: 1086883541}
   - {fileID: 1742576782}
