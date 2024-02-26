@@ -32,7 +32,7 @@ public class CharacterMovementController : MonoBehaviour
 
     //Audio:
     [SerializeField]
-    AudioSource audioSource;
+    AudioSource audioSource, audioSourceWalk;
 
     [SerializeField]
     AudioClip walk;
@@ -43,6 +43,8 @@ public class CharacterMovementController : MonoBehaviour
    
     [SerializeField]
     AudioClip deathSound;
+
+
 
     private void Awake()
     {
@@ -78,21 +80,6 @@ private void FixedUpdate()
         IsMoving = movement != Vector3.zero;
         animator.SetBool("IsMoving", IsMoving);
 
-        // Reproduce el sonido de caminar solo cuando el personaje comienza a moverse
-        if (IsMoving && !wasMoving)
-        {
-            audioSource.clip = walk;
-            audioSource.Play();
-        }
-
-        // Detiene el sonido si el personaje se detiene
-        if (!IsMoving && wasMoving)
-        {
-            audioSource.Stop();
-        }
-
-        wasMoving = IsMoving;
-
         // Mueve al personaje
         characterController.Move(movement * speed * Time.deltaTime);
 
@@ -106,8 +93,14 @@ private void FixedUpdate()
             hitTimer = 1;
         }
     }
-
-
+}
+    private void Update()
+    {
+        // Reproduce el sonido de caminar solo cuando el personaje comienza a moverse
+        if (IsMoving == false)
+        {
+            audioSourceWalk.Play();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -48,20 +48,17 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && attackCooldown == attackCooldownTime)
             {
-                audioSource.clip = punch;
-                audioSource.Play();
+                if (attackDuration == attackDurationTime)
+                {
+                    audioSource.PlayOneShot(punch);
+                }
+
                 attacking = true;
                 CharacterMovementController.instance.attacking = true;
             }
             if (attacking == true)
             {
                 attackDuration -= Time.deltaTime;
-
-                // Si aún no ha golpeado al enemigo y el tiempo de duración es mayor que el tiempo deseado para golpear
-                if (!hasHitEnemy && attackDurationTime - attackDuration >= 0.1f)
-                {
-                    StartCoroutine(HitEnemySound());
-                }
             }
             if (attackDuration <= 0)
             {
@@ -69,7 +66,6 @@ public class CharacterAttackController : MonoBehaviour
                 attacking = false;
                 attackDuration = attackDurationTime;
                 cooldown = true;
-                hasHitEnemy = false; // Restablece la variable al final del ataque
             }
             if (cooldown == true)
             {
@@ -87,27 +83,15 @@ public class CharacterAttackController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy")
-        {
             if (attacking == true)
             {
-                StartCoroutine(enemyHit(other.gameObject));
+                if (other.tag == "Enemy")
+                {
+                audioSource.clip = hitEnemy;
+                audioSource.Play();
+                    StartCoroutine(enemyHit(other.gameObject));
+                }
             }
-        }
-    }
-
-    IEnumerator HitEnemySound()
-    {
-        // Reproduce el sonido al golpear al enemigo
-        if (audioSource != null && hitEnemy != null)
-        {
-            audioSource.clip = hitEnemy;
-            audioSource.Play();
-        }
-
-        hasHitEnemy = true; // Marca que ya se ha golpeado al enemigo
-
-        yield return null;
     }
 
     IEnumerator enemyHit(GameObject enemy)

@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
-    //AnimationCurve heightCurve;
     bool OnTheFloor = true;
     bool Movement = false;
 
