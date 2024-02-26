@@ -40,6 +40,10 @@ public class ButtonController : MonoBehaviour
     {
         StartCoroutine(PlayAndLoadScene("ESCENA DE PRUEBA", 0.3f));
     }
+    public void StartGame2()
+    {
+        StartCoroutine(PlayAndLoadScene("Controles", 0.3f));
+    }
 
     public void CloseGame()
     {

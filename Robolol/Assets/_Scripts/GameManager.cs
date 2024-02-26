@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             gameOver = true;
 
-            audioSource.Stop(); // Detiene cualquier sonido que esté reproduciéndose
+            audioSource.Stop();
             audioSource.PlayOneShot(sound);
             Time.timeScale = 0;
             endScreen.SetActive(true);
